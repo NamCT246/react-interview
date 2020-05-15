@@ -1,7 +1,7 @@
 import React from 'react'
 import { waitFor, waitForElementToBeRemoved, getByText, getAllByLabelText, getByRole } from '@testing-library/dom'
 import userEvent from '@testing-library/user-event'
-import { screen, render, within } from '@testing-library/react'
+import { render, within } from '@testing-library/react'
 
 import { fetchTodos } from '../todoMockRequest'
 import TodoList from '../todoList'
@@ -46,7 +46,7 @@ test('should add a new todo to the todo list', async () => {
     const mockArray = [{ id: 6, name: 'Go to the supermarket', complete: false }]
     const mockInput = 'test user'
     fetchTodos.mockResolvedValueOnce(mockArray)
-    const { getByTestId, getAllByRole, getByRole } = useTodoList()
+    const { getByTestId, getByRole } = useTodoList()
 
     expect(fetchTodos).toHaveBeenCalledTimes(1)
     await waitForElementToBeRemoved(() => getByTestId('todo-fetching'))

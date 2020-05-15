@@ -1,26 +1,31 @@
 import React from 'react'
 import { func, shape, string, number, bool } from 'prop-types'
 
-const TodoItem = ({ todo, onClick, onRemoveClick }) => {
-    let text
+import classes from './TodoItem.module.css'
 
-    if (todo.complete === true) {
-        text = 'Complete'
-    } else {
-        text = 'Incomplete'
-    }
+const TodoItem = ({ todo, onClick, onRemoveClick }) => {
+    const todoCompletedClass = todo.complete ? classes.complete : classes.incomplete
 
     return (
-        <li className="list-wrapper" role="list-item" data-testid="list-item">
+        <li className={`${classes.root} ${todoCompletedClass}`} id="todo-input-checkbox" role="list-item">
             <input
-                className="list-incompleted"
-                onClick={() => onClick(todo.id)}
+                className={classes.input}
+                onChange={() => onClick(todo.id)}
                 type="checkbox"
                 data-testid={`todo-complete-${todo.id}`}
-                defaultChecked={todo.complete}
+                checked={todo.complete}
             />
-            <p onClick={() => onClick(todo.id)}>{todo.name}</p>
-            <span className="btn" onClick={() => onRemoveClick(todo.id)} data-testid={`todo-delete-${todo.id}`}>
+            <label class={classes.label} for="todo-input-checkbox">
+                <span></span>
+            </label>
+            <p className={classes.name} onClick={() => onClick(todo.id)}>
+                {todo.name}
+            </p>
+            <span
+                className={classes.delete}
+                onClick={() => onRemoveClick(todo.id)}
+                data-testid={`todo-delete-${todo.id}`}
+            >
                 x
             </span>
         </li>

@@ -5,11 +5,13 @@ import classes from './TodoAction.module.css'
 
 const TodoAction = ({ onSubmit, newTodoName, onInputChange, disabled }) => {
     return (
-        <form className="todo-input" style={{ 'grid-template-columns': '7fr 2fr' }} data-testid="todo-form">
+        <form className={classes.root} data-testid="todo-form">
             <input
+                className={classes.input}
                 placeholder="Add new todo"
                 value={newTodoName}
                 onChange={onInputChange}
+                role="input"
                 data-testid="todo-input"
                 label="todo-input"
             />
@@ -17,11 +19,12 @@ const TodoAction = ({ onSubmit, newTodoName, onInputChange, disabled }) => {
                 className="btn btn-success"
                 type="submit"
                 value="Submit"
+                role="button"
                 data-testid="todo-submit"
                 disabled={disabled}
                 onClick={onSubmit}
             >
-                Submit
+                Add
             </button>
         </form>
     )

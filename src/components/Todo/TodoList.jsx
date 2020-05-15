@@ -87,7 +87,9 @@ const TodoList = () => {
             {fetching && <div data-testid="todo-fetching">Fetching</div>}
             {error && <div data-testid="todo-error">Failed to load Todos</div>}
             <>
-                <ul role="list-item-group">{renderTodoItems}</ul>
+                <ul className={classes.listItemGroup} role="list-item-group">
+                    {renderTodoItems}
+                </ul>
                 <TodoAction
                     onSubmit={onAddNewTodo}
                     newTodoName={newTodoName}
