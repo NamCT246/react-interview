@@ -1,16 +1,11 @@
 import React from 'react'
-import { func, string, boolean } from 'prop-types'
+import { func, string, bool } from 'prop-types'
 
 import classes from './TodoAction.module.css'
 
 const TodoAction = ({ onSubmit, newTodoName, onInputChange, disabled }) => {
     return (
-        <div
-            className="todo-input"
-            style={{ 'grid-template-columns': '7fr 2fr' }}
-            onSubmit={onSubmit}
-            data-testid="todo-form"
-        >
+        <form className="todo-input" style={{ 'grid-template-columns': '7fr 2fr' }} data-testid="todo-form">
             <input
                 placeholder="Add new todo"
                 value={newTodoName}
@@ -24,10 +19,11 @@ const TodoAction = ({ onSubmit, newTodoName, onInputChange, disabled }) => {
                 value="Submit"
                 data-testid="todo-submit"
                 disabled={disabled}
+                onClick={onSubmit}
             >
                 Submit
             </button>
-        </div>
+        </form>
     )
 }
 
@@ -35,7 +31,7 @@ TodoAction.propTypes = {
     onSubmit: func.isRequired,
     newTodoName: string,
     onInputChange: func.isRequired,
-    disabled: boolean,
+    disabled: bool.isRequired,
 }
 
 export default TodoAction

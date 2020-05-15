@@ -84,17 +84,17 @@ const TodoList = () => {
 
     return (
         <div className={classes.root}>
-            {error && <div data-testid="todo-error">Failed to load Todos</div>}
-
             {fetching && <div data-testid="todo-fetching">Fetching</div>}
-
-            {renderTodoItems}
-            <TodoAction
-                onSubmit={onAddNewTodo}
-                newTodoName={newTodoName}
-                onInputChange={onInputChange}
-                disabled={fetching || error}
-            />
+            {error && <div data-testid="todo-error">Failed to load Todos</div>}
+            <>
+                <ul role="list-item-group">{renderTodoItems}</ul>
+                <TodoAction
+                    onSubmit={onAddNewTodo}
+                    newTodoName={newTodoName}
+                    onInputChange={onInputChange}
+                    disabled={fetching || error}
+                />
+            </>
         </div>
     )
 }

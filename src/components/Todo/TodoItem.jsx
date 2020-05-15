@@ -1,28 +1,29 @@
 import React from 'react'
-import { func, shape, string, number, boolean } from 'prop-types'
+import { func, shape, string, number, bool } from 'prop-types'
 
 const TodoItem = ({ todo, onClick, onRemoveClick }) => {
-    let color
     let text
 
     if (todo.complete === true) {
-        color = 'lightgreen'
         text = 'Complete'
     } else {
-        color = 'pink'
         text = 'Incomplete'
     }
 
     return (
-        <div className="wrapper" style={{ backgroundColor: color }}>
-            <h3>{todo.name}</h3>
-            <button className="btn" onClick={() => onClick(todo.id)}>
-                {text}
-            </button>
-            <button className="btn" onClick={() => onRemoveClick(todo.id)}>
-                Remove from list
-            </button>
-        </div>
+        <li className="list-wrapper" role="list-item" data-testid="list-item">
+            <input
+                className="list-incompleted"
+                onClick={() => onClick(todo.id)}
+                type="checkbox"
+                data-testid={`todo-complete-${todo.id}`}
+                defaultChecked={todo.complete}
+            />
+            <p onClick={() => onClick(todo.id)}>{todo.name}</p>
+            <span className="btn" onClick={() => onRemoveClick(todo.id)} data-testid={`todo-delete-${todo.id}`}>
+                x
+            </span>
+        </li>
     )
 }
 
@@ -30,7 +31,7 @@ TodoItem.propTypes = {
     todo: shape({
         id: number,
         name: string,
-        completed: boolean,
+        completed: bool,
     }),
     onClick: func.isRequired,
     onRemoveClick: func.isRequired,
